@@ -1,0 +1,29 @@
+{
+  "manifest_version": 2,
+  "name": "unigraph-dev-email-thunderbird",
+  "version": "0.0.1",
+  "description": "Thunderbird extension for Unigraph email",
+  "applications": {
+    "gecko": {
+        "id": "helloworld@yoursite.com",
+        "strict_min_version": "78.0"
+    }
+  },
+  "browser_action": {
+      "default_popup": "popup.html",
+      "default_title": "Unigraph"
+  },
+  "options_ui": {
+    "page": "popup.html",
+    "open_in_tab": false,
+    "browser_style": true
+  },
+  "background": {
+    "scripts": [
+        "scripts/background.js"
+    ]
+  },
+  "permissions": [
+    "storage", "messagesRead", "accountsRead"
+  ]
+}
