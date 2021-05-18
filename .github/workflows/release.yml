@@ -1,0 +1,26 @@
+name: release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release-addon:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - run: zip -r release.zip .
+
+      - run: mv release.zip release.xpi
+
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: true
+          title: "Development Build"
+          files: |
+            release.xpi
