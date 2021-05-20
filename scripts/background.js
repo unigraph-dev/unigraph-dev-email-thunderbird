@@ -13,7 +13,15 @@ function connectToUnigraph(callback) {
 }
 
 async function getMessagesSince(when) {
-    const msgs = (await browser.messages.query({fromDate: (new Date() - dates[when])})).messages
+    let cont = true;
+    let lst = await browser.messages.query({fromDate: (new Date() - dates[when])})
+    if (!lst.id) cont = false;
+    let msgs = lst.messages;
+    while(cont) {
+        lst = await browser.messages.continueList(lst.id);
+        if (!lst.id) cont = false;
+        msgs.push(...lst.messages)
+    }
     return msgs;
 }
 
