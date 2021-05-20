@@ -35,7 +35,7 @@ async function sendToUnigraph(msgs) {
 }
 
 connectToUnigraph(() => {
-    getMessagesSince('last-day').then(sendToUnigraph);
+    getMessagesSince('last-month').then(sendToUnigraph);
     browser.messages.onNewMailReceived.addListener(function(folder, messageList) {
         sendToUnigraph(messageList.messages);
     })
